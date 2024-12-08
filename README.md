@@ -95,7 +95,18 @@ An example:
 	+ cp -rp data2 /backup
 	cp: data2: Permission denied
 
+### Saving output
+
+If you set the variable `CRONIC_RUN_LOG` to a local file name, the output is also written to the file, both in case
+of failure _and_ successful runs. That way you can refer back to the last execution, or see the errors if the mail
+got lost or not delivered.
+
+For example:
+
+	0 1 * * * CRONIC_RUN_LOG=/var/log/backup.log cronic backup
+
 ### Version History
+* v4 - Allows sending successful last run to a local file (in case you want to know what happened last)
 * v3 - Use mktemp-d to avoid race-conditions and security problems.
 * v2 - Corrected command evaluation, so shell meta-chars are preserved correctly (Thanks to Frank Wallingford for the fix).
 * v1 - Initial release.

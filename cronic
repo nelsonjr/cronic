@@ -24,9 +24,7 @@ else
     ERR=$TRACE
 fi
 
-if [ $RESULT -ne 0 -o -s "$ERR" ]
-    then
-    echo "Cronic detected failure or error output for the command:"
+results() {
     echo "$@"
     echo
     echo "RESULT CODE: $RESULT"
@@ -42,6 +40,25 @@ if [ $RESULT -ne 0 -o -s "$ERR" ]
         echo "TRACE-ERROR OUTPUT:"
         cat "$TRACE"
     fi
+}
+
+if [ $RESULT -ne 0 -o -s "$ERR" ]
+    then
+    echo "Cronic detected failure or error output for the command:"
+    results
+fi
+
+if [ ! -z "$CRONIC_RUN_LOG" ]
+    then
+    (
+        if [ $RESULT -ne 0 -o -s "$ERR" ]
+            then
+                echo -n "Cronic detected failure or error output for the command (last run: $(date)):"
+            else
+                echo -n "Cronic ran successfully the command (last run: $(date)):"
+            fi
+        results
+    ) > "$CRONIC_RUN_LOG"
 fi
 
 rm -rf "$TMP"
