@@ -10,6 +10,7 @@ TMP=$(mktemp -d)
 OUT=$TMP/cronic.out
 ERR=$TMP/cronic.err
 TRACE=$TMP/cronic.trace
+CRONIC_RUN_LOG=${CRONIC_RUN_LOG:-}
 
 set +e
 "$@" >$OUT 2>$TRACE
