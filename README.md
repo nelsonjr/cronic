@@ -50,7 +50,7 @@ broken, it isn't cron. The only solution left is a work-around.
 
 ## The Cure: Cronic
 
-Download: [cronic](http://habilis.net/cronic/cronic) v3
+Download: [cronic](http://habilis.net/cronic/cronic) v4
 
 Cronic is a small shim shell script for wrapping cron jobs so that cron only sends email
 when an error has occurred. Cronic defines an error as any non-trace error output or a
